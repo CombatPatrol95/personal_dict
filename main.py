@@ -78,11 +78,25 @@ class StartPage(tk.Frame):
                 defination_box.insert(2.0, "_" * 30 + "\n")
                 defination_box.insert(4.0, search_word(typed_word))
                 defination_box.config(state=tk.DISABLED)
+        # def search(_=None):
+        #     typed_word = search_entry.get()
+        #     if dictionary_var.get() == 1 and len(typed_word) > 1:
+        #         defination_box.config(state=tk.NORMAL)
+        #         search_entry.delete(0, "end")
+        #         defination_box.delete(1.0, tk.END)
+        #         defination_box.insert(1.0, typed_word.capitalize() + "\n")
+        #         defination_box.insert(2.0, "_" * 30 + "\n")
+        #         defination_box.insert(4.0, search_word(typed_word))
+        #         defination_box.config(state=tk.DISABLED)
 
         def insert_new(_=None):
-            typed_word = search_entry.get()
+            typed_word = insert_entry.get()
             typed_word = typed_word.split(',')
-            insert_new_word(typed_word)
+            if len(typed_word) == 6:
+                insert_new_word(typed_word)
+            else:
+                print("Please provide all 6 fields.")
+            # insert_new_word(typed_word)
 
             # if dictionary_var.get() == 1 and len(typed_word) > 1:
             #     defination_box.config(state=tk.NORMAL)
@@ -211,13 +225,26 @@ class StartPage(tk.Frame):
         insert_entry = tk.Entry(insert_widget_frame, width=34, font=("Times New Roman", 18))
         insert_entry.pack(pady=20, side=tk.RIGHT)
         insert_entry.focus_set()
-        insert_entry.bind("<KeyRelease>", check_insert)
+        insert_entry.bind("<KeyRelease>", insert_new)
 
         insert_img = tk.PhotoImage(file=os.path.join(images, 'search.png'))
         insert_btn = tk.Button(insert_widget_frame, image=insert_img, bg=theme_color, width=80,
                                activebackground='#6b5924', command=insert_new)
-        insert_btn.image = search_img
+        insert_btn.image = insert_img
         insert_btn.pack(side=tk.LEFT, padx=5)
+        # insert_text = tk.Label(insert_widget_frame, bg="#ffffff", text="New Word", font=("Times New Roman", 14))
+        # insert_text.pack(side=tk.LEFT)
+        #
+        # insert_entry = tk.Entry(insert_widget_frame, width=34, font=("Times New Roman", 18))
+        # insert_entry.pack(pady=20, side=tk.RIGHT)
+        # insert_entry.focus_set()
+        # insert_entry.bind("<KeyRelease>", check_insert)
+        #
+        # insert_img = tk.PhotoImage(file=os.path.join(images, 'search.png'))
+        # insert_btn = tk.Button(insert_widget_frame, image=insert_img, bg=theme_color, width=80,
+        #                        activebackground='#6b5924', command=insert_new)
+        # insert_btn.image = search_img
+        # insert_btn.pack(side=tk.LEFT, padx=5)
 
         defination_frame = tk.Frame(self)
         defination_frame.pack(fill=tk.BOTH, padx=10, expand=True)
